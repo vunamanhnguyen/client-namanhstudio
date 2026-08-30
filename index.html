@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Nam Anh Studio · Client portal">
+  <title>Nam Anh Studio · Client portal</title>
+
+  <link rel="icon" type="image/png"
+    href="https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-app-icon-favicon2_orig.png">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #000;
+      --surface: #090909;
+      --surface-2: #0f0f0f;
+      --surface-3: #151515;
+      --line: #242424;
+      --line-strong: #343434;
+      --text: #fff;
+      --muted: #a1a1a1;
+      --muted-2: #707070;
+      --inverse: #000;
+      --white: #fff;
+      --radius: 16px;
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
+    }
+
+    [data-theme="light"] {
+      --bg: #f7f7f7;
+      --surface: #fff;
+      --surface-2: #f1f1f1;
+      --surface-3: #e9e9e9;
+      --line: #dedede;
+      --line-strong: #c7c7c7;
+      --text: #080808;
+      --muted: #626262;
+      --muted-2: #858585;
+      --inverse: #fff;
+      --white: #000;
+      --shadow: 0 24px 70px rgba(0,0,0,.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 76px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(18px);
+    }
+
+    [data-theme="light"] .nav {
+      background: rgba(247,247,247,.88);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 40px));
+      height: 100%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand img {
+      width: 158px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: var(--white);
+      color: var(--inverse);
+      border-color: var(--white);
+    }
+
+    .primary:hover {
+      opacity: .88;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .language-select {
+      appearance: none;
+      min-height: 42px;
+      padding: 0 38px 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .select-wrap::after {
+      content: "⌄";
+      position: absolute;
+      right: 13px;
+      top: 8px;
+      pointer-events: none;
+      color: var(--muted);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 40px));
+      min-height: calc(100vh - 76px);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 80px;
+      padding: 80px 0 100px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: var(--muted-2);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(52px, 7vw, 92px);
+      line-height: .96;
+      letter-spacing: -.065em;
+      font-weight: 600;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-actions button {
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .hero-actions .primary {
+      background: var(--white);
+      color: var(--inverse);
+    }
+
+    /* =========================
+       HERO CARD
+    ========================= */
+
+    .hero-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.09), transparent 34%),
+        var(--surface);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(255,255,255,.04);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .card-label {
+      color: var(--muted-2);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-weight: 700;
+    }
+
+    .card-title {
+      margin: 13px 0 28px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 29px;
+      letter-spacing: -.03em;
+    }
+
+    .steps {
+      display: grid;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 14px;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .step:first-child {
+      border-top: 0;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .step strong {
+      display: block;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       PROCESS
+    ========================= */
+
+    .process {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .process-item {
+      padding: 34px 28px 36px;
+      border-left: 1px solid var(--line);
+    }
+
+    .process-item:last-child {
+      border-right: 1px solid var(--line);
+    }
+
+    .process-item b {
+      display: block;
+      color: var(--muted-2);
+      font: 600 12px "Space Grotesk";
+      margin-bottom: 12px;
+      letter-spacing: .08em;
+    }
+
+    .process-item strong {
+      font: 600 18px "Space Grotesk";
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+      padding: 28px 0;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.76);
+      backdrop-filter: blur(12px);
+    }
+
+    .overlay.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(920px, 100%);
+      max-height: min(900px, calc(100vh - 40px));
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(.985);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 24px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(9,9,9,.94);
+      backdrop-filter: blur(14px);
+    }
+
+    [data-theme="light"] .modal-head {
+      background: rgba(255,255,255,.94);
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      font: 600 27px "Space Grotesk";
+      letter-spacing: -.035em;
+    }
+
+    .modal-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .close {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .close:hover {
+      border-color: var(--line-strong);
+    }
+
+    .modal-body {
+      padding: 26px;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .section-title {
+      margin: 0 0 14px;
+      font: 600 17px "Space Grotesk";
+      letter-spacing: -.02em;
+    }
+
+    .form-section + .form-section {
+      margin-top: 30px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface-2);
+      color: var(--text);
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--line-strong);
+    }
+
+    /* =========================
+       PLANS
+    ========================= */
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .plan {
+      position: relative;
+      min-height: 88px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface-2);
+      text-align: left;
+      color: var(--text);
+      transition: .18s ease;
+    }
+
+    .plan:hover {
+      border-color: var(--line-strong);
+    }
+
+    .plan.selected {
+      border-color: var(--white);
+      box-shadow: inset 0 0 0 1px var(--white);
+    }
+
+    .plan-name {
+      display: block;
+      font: 600 14px "Space Grotesk";
+    }
+
+    .plan-price {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .plan-check {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+    }
+
+    .plan.selected .plan-check {
+      background: var(--white);
+      border-color: var(--white);
+    }
+
+    .plan.selected .plan-check::after {
+      content: "✓";
+      color: var(--inverse);
+      font-size: 11px;
+      position: absolute;
+      left: 3px;
+      top: -1px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 52px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface-2);
+      font-size: 13px;
+      transition: .15s ease;
+    }
+
+    .option.locked {
+      opacity: .36;
+      cursor: not-allowed;
+    }
+
+    .option:not(.locked):hover {
+      border-color: var(--line-strong);
+    }
+
+    .option input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--white);
+      flex: 0 0 auto;
+    }
+
+    .option span {
+      line-height: 1.4;
+    }
+
+    .option small {
+      display: block;
+      color: var(--muted-2);
+      margin-top: 2px;
+      font-size: 10px;
+    }
+
+    /* =========================
+       SUMMARY
+    ========================= */
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      margin-top: 30px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface-2);
+    }
+
+    .summary span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .summary strong {
+      display: block;
+      margin-top: 4px;
+      font: 600 25px "Space Grotesk";
+    }
+
+    .summary button {
+      min-height: 48px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--inverse);
+      font-weight: 700;
+    }
+
+    .summary button:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
+    .notice {
+      margin-top: 12px;
+      color: var(--muted-2);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       TRACKING
+    ========================= */
+
+    .track-box {
+      padding: 10px 0 6px;
+    }
+
+    .track-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .track-input input {
+      flex: 1;
+      min-height: 52px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface-2);
+      color: var(--text);
+      outline: none;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 600;
+    }
+
+    .track-input button {
+      min-height: 52px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--white);
+      color: var(--inverse);
+      font-weight: 700;
+    }
+
+    .track-result {
+      display: none;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .track-result.show {
+      display: block;
+    }
+
+    .track-code {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .track-code span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .track-code strong {
+      display: block;
+      margin-top: 4px;
+      font: 600 21px "Space Grotesk";
+      letter-spacing: .06em;
+    }
+
+    .timeline {
+      padding: 8px 18px 18px;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 12px;
+      padding: 13px 0;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      margin-top: 5px;
+      border: 2px solid var(--muted-2);
+      border-radius: 50%;
+    }
+
+    .timeline-item.active .timeline-dot {
+      border-color: var(--white);
+      background: var(--white);
+    }
+
+    .timeline-item strong {
+      font-size: 13px;
+    }
+
+    .timeline-item span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 11px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 200;
+      max-width: min(390px, calc(100% - 40px));
+      padding: 13px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 11px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      display: none;
+      font-size: 13px;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding-top: 60px;
+      }
+
+      .hero-card {
+        max-width: 620px;
+      }
+
+      .plans {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav {
+        height: 68px;
+      }
+
+      .nav-inner {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .brand img {
+        width: 132px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-btn {
+        padding: 0 11px;
+        font-size: 12px;
+      }
+
+      .language-select {
+        max-width: 70px;
+        padding-left: 10px;
+        padding-right: 28px;
+      }
+
+      .hero,
+      .process-inner,
+      footer {
+        width: calc(100% - 24px);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 62px 0 70px;
+      }
+
+      h1 {
+        font-size: clamp(46px, 15vw, 70px);
+      }
+
+      .hero-copy {
+        font-size: 15px;
+      }
+
+      .process-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .process-item {
+        border-left: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .process-item:last-child {
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      footer {
+        padding: 24px 0;
+      }
+
+      .modal-body,
+      .modal-head {
+        padding: 20px;
+      }
+
+      .grid-2,
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .plans {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .track-input {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+
+    <a class="brand" href="#" aria-label="Nam Anh Studio">
+      <img
+        id="brandLogo"
+        src="https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-logo-ch-nh_orig.png"
+        alt="Nam Anh Studio">
+    </a>
+
+    <nav class="nav-actions" aria-label="Navigation">
+
+      <button class="nav-btn" id="newOrderBtn" type="button">
+        Nouvelle commande
+      </button>
+
+      <button class="nav-btn" id="trackBtn" type="button">
+        Suivre ma commande
+      </button>
+
+      <button
+        class="nav-btn"
+        id="themeBtn"
+        type="button"
+        aria-label="Changer de thème">
+        ☾
+      </button>
+
+      <div class="select-wrap">
+        <select
+          class="language-select"
+          id="languageSelect"
+          aria-label="Langue">
+          <option value="fr">FR</option>
+          <option value="vi">VI</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div>
+
+      <div class="eyebrow">
+        Nam Anh Studio · Client portal
+      </div>
+
+      <h1 id="heroTitle">
+        Votre prochaine présence en ligne commence ici.
+      </h1>
+
+      <p class="hero-copy" id="heroCopy">
+        Expliquez votre projet avec précision.
+        Nous vous remettrons un lien privé pour suivre chaque étape,
+        sans créer de compte.
+      </p>
+
+      <div class="hero-actions">
+
+        <button
+          class="primary"
+          id="heroOrderBtn"
+          type="button">
+          Créer ma commande
+        </button>
+
+        <button
+          id="heroTrackBtn"
+          type="button">
+          Suivre ma commande
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <aside class="hero-card">
+
+      <div class="card-label">
+        Client portal
+      </div>
+
+      <div class="card-title" id="simpleTitle">
+        Un parcours simple.
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">01</div>
+
+          <div>
+            <strong id="briefTitle">
+              Brief structuré
+            </strong>
+
+            <span id="briefDescription">
+              Votre projet, clairement défini.
+            </span>
+          </div>
+        </div>
+
+
+        <div class="step">
+          <div class="step-num">02</div>
+
+          <div>
+            <strong id="tariffTitle">
+              Tarif transparent
+            </strong>
+
+            <span id="tariffDescription">
+              Votre offre et vos options.
+            </span>
+          </div>
+        </div>
+
+
+        <div class="step">
+          <div class="step-num">03</div>
+
+          <div>
+            <strong id="privateTitle">
+              Suivi privé
+            </strong>
+
+            <span id="privateDescription">
+              Votre progression avec votre code.
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+
+  <!-- PROCESS -->
+
+  <section class="process">
+
+    <div class="process-inner">
+
+      <div class="process-item">
+        <b>01</b>
+        <strong id="processBrief">
+          Brief structuré
+        </strong>
+      </div>
+
+      <div class="process-item">
+        <b>02</b>
+        <strong id="processTariff">
+          Tarif transparent
+        </strong>
+      </div>
+
+      <div class="process-item">
+        <b>03</b>
+        <strong id="processPrivate">
+          Suivi privé
+        </strong>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+  © 2026
+  <a
+    href="https://namanhstudio.vercel.app"
+    target="_blank"
+    rel="noopener">
+    Nam Anh Studio
+  </a>
+</footer>
+
+
+<!-- =========================
+     NEW ORDER MODAL
+========================= -->
+
+<div
+  class="overlay"
+  id="orderOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="orderTitle">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div>
+
+        <h2 id="orderTitle">
+          Nouvelle commande
+        </h2>
+
+        <p id="orderSubtitle">
+          Présentez les éléments essentiels de votre projet.
+        </p>
+
+      </div>
+
+      <button
+        class="close"
+        type="button"
+        data-close="orderOverlay"
+        aria-label="Fermer">
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="modal-body"
+      id="orderForm"
+      action="https://formspree.io/f/mljereeb"
+      method="POST">
+
+      <input
+        type="hidden"
+        name="_subject"
+        id="subjectField"
+        value="Nouvelle commande · Nam Anh Studio">
+
+      <input
+        type="hidden"
+        name="package"
+        id="packageField">
+
+      <input
+        type="hidden"
+        name="estimated_price"
+        id="priceField">
+
+      <input
+        type="hidden"
+        name="selected_features"
+        id="featuresField">
+
+
+      <!-- CLIENT -->
+
+      <section class="form-section">
+
+        <h3
+          class="section-title"
+          id="clientSection">
+          Informations client
+        </h3>
+
+        <div class="grid-2">
+
+          <div class="field">
+
+            <label
+              for="name"
+              id="nameLabel">
+              Nom complet
+            </label>
+
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required>
+
+          </div>
+
+
+          <div class="field">
+
+            <label
+              for="email"
+              id="emailLabel">
+              Email pour les notifications
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PLAN -->
+
+      <section class="form-section">
+
+        <h3
+          class="section-title"
+          id="offerSection">
+          Choisissez votre offre
+        </h3>
+
+        <div class="plans" id="plans">
+
+          <button
+            class="plan selected"
+            type="button"
+            data-plan="STARTER"
+            data-price="29">
+
+            <span class="plan-name">
+              STARTER
+            </span>
+
+            <span class="plan-price">
+              €29
+            </span>
+
+            <i class="plan-check"></i>
+
+          </button>
+
+
+          <button
+            class="plan"
+            type="button"
+            data-plan="ESSENTIAL"
+            data-price="49">
+
+            <span class="plan-name">
+              ESSENTIAL
+            </span>
+
+            <span class="plan-price">
+              €49
+            </span>
+
+            <i class="plan-check"></i>
+
+          </button>
+
+
+          <button
+            class="plan"
+            type="button"
+            data-plan="BUSINESS"
+            data-price="69">
+
+            <span class="plan-name">
+              BUSINESS
+            </span>
+
+            <span class="plan-price">
+              €69
+            </span>
+
+            <i class="plan-check"></i>
+
+          </button>
+
+
+          <button
+            class="plan"
+            type="button"
+            data-plan="CUSTOM"
+            data-price="89">
+
+            <span class="plan-name">
+              CUSTOM
+            </span>
+
+            <span class="plan-price">
+              €89+
+            </span>
+
+            <i class="plan-check"></i>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- PAGES -->
+
+      <section class="form-section">
+
+        <h3
+          class="section-title"
+          id="pagesSection">
+          Nombre de pages
+        </h3>
+
+        <div class="field">
+
+          <label
+            for="pages"
+            id="pagesLabel">
+            Pages souhaitées
+          </label>
+
+          <select
+            id="pages"
+            name="pages"
+            required>
+
+            <option value="1">
+              1 page
+            </option>
+
+            <option value="3-5">
+              3–5 pages
+            </option>
+
+            <option value="5-8">
+              5–8 pages
+            </option>
+
+          </select>
+
+        </div>
+
+      </section>
+
+
+      <!-- FEATURES -->
+
+      <section class="form-section">
+
+        <h3
+          class="section-title"
+          id="featuresSection">
+          Fonctionnalités
+        </h3>
+
+        <div
+          class="options"
+          id="options">
+        </div>
+
+      </section>
+
+
+      <!-- LOGO -->
+
+      <section class="form-section">
+
+        <h3
+          class="section-title"
+          id="logoSection">
+          Logo
+        </h3>
+
+        <label class="option">
+
+          <input
+            type="checkbox"
+            id="logoOption"
+            name="logo_creation"
+            value="Oui">
+
+          <span>
+
+            <strong id="logoLabel">
+              Création de logo
+            </strong>
+
+            <small id="logoPrice">
+              +2 €
+            </small>
+
+          </span>
+
+        </label>
+
+      </section>
+
+
+      <!-- SUMMARY -->
+
+      <div class="summary">
+
+        <div>
+
+          <span id="estimateLabel">
+            Estimation
+          </span>
+
+          <strong id="priceDisplay">
+            €29
+          </strong>
+
+        </div>
+
+        <button
+          type="submit"
+          id="sendButton">
+          Envoyer ma commande
+        </button>
+
+      </div>
+
+
+      <div
+        class="notice"
+        id="orderNotice">
+        Les fonctionnalités disponibles dépendent de l’offre sélectionnée.
+        Les fonctionnalités hors offre restent visibles mais ne peuvent pas
+        être sélectionnées.
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     TRACK MODAL
+========================= -->
+
+<div
+  class="overlay"
+  id="trackOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="trackTitle">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div>
+
+        <h2 id="trackTitle">
+          Suivre ma commande
+        </h2>
+
+        <p id="trackSubtitle">
+          Entrez votre code de suivi.
+        </p>
+
+      </div>
+
+      <button
+        class="close"
+        type="button"
+        data-close="trackOverlay"
+        aria-label="Fermer">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="track-box">
+
+        <div class="track-input">
+
+          <input
+            id="trackingCode"
+            type="text"
+            placeholder="NAS-2026-8F42K"
+            maxlength="32">
+
+          <button
+            type="button"
+            id="trackSubmit">
+            Suivre
+          </button>
+
+        </div>
+
+
+        <div
+          class="track-result"
+          id="trackResult">
+
+          <div class="track-code">
+
+            <span id="trackingCodeLabel">
+              Code de suivi
+            </span>
+
+            <strong id="resultCode">
+              —
+            </strong>
+
+          </div>
+
+          <div
+            class="timeline"
+            id="timeline">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<script>
+
+/* =====================================================
+   PACKAGES
+===================================================== */
+
+const plans = {
+
+  STARTER: {
+    price: 29,
+    features: [
+      "responsive",
+      "nav",
+      "basicMotion",
+      "social",
+      "contact",
+      "online",
+      "domain"
+    ]
+  },
+
+  ESSENTIAL: {
+    price: 49,
+    features: [
+      "responsive",
+      "nav",
+      "basicMotion",
+      "social",
+      "contact",
+      "customDesign",
+      "seo",
+      "online",
+      "domain"
+    ]
+  },
+
+  BUSINESS: {
+    price: 69,
+    features: [
+      "responsive",
+      "nav",
+      "basicMotion",
+      "social",
+      "contact",
+      "customDesign",
+      "contactForm",
+      "maps",
+      "hours",
+      "gallery",
+      "seo",
+      "online",
+      "domain"
+    ]
+  },
+
+  CUSTOM: {
+    price: 89,
+    features: [
+      "responsive",
+      "nav",
+      "basicMotion",
+      "social",
+      "contact",
+      "customDesign",
+      "advancedMotion",
+      "contactForm",
+      "maps",
+      "hours",
+      "gallery",
+      "seo",
+      "customFeatures",
+      "booking",
+      "api",
+      "multilingual",
+      "online",
+      "domain"
+    ]
+  }
+
+};
+
+
+/* =====================================================
+   FEATURE TRANSLATIONS
+===================================================== */
+
+const featureTranslations = {
+
+  fr: {
+    responsive: "Design compatible tous appareils",
+    nav: "Barre de navigation",
+    basicMotion: "Effets de mouvement de base",
+    advancedMotion: "Effets de mouvement avancés",
+    social: "Liens réseaux sociaux",
+    contact: "Section contact",
+    contactForm: "Formulaire de contact",
+    maps: "Google Maps",
+    hours: "Heures d'ouverture",
+    gallery: "Galerie d'images",
+    seo: "Optimisation SEO de base",
+    customFeatures: "Fonctionnalités personnalisées",
+    booking: "Système de réservation",
+    api: "Intégration API",
+    multilingual: "Support multilingue",
+    online: "Mise en ligne du site",
+    domain: "Nom de domaine — première année"
+  },
+
+  vi: {
+    responsive: "Thiết kế tương thích mọi thiết bị",
+    nav: "Thanh điều hướng",
+    basicMotion: "Hiệu ứng chuyển động cơ bản",
+    advancedMotion: "Hiệu ứng chuyển động nâng cao",
+    social: "Liên kết mạng xã hội",
+    contact: "Phần liên hệ",
+    contactForm: "Biểu mẫu liên hệ",
+    maps: "Google Maps",
+    hours: "Giờ mở cửa",
+    gallery: "Thư viện hình ảnh",
+    seo: "Tối ưu hóa SEO cơ bản",
+    customFeatures: "Tính năng tùy chỉnh",
+    booking: "Hệ thống đặt lịch",
+    api: "Tích hợp API",
+    multilingual: "Hỗ trợ nhiều ngôn ngữ",
+    online: "Đưa website lên mạng",
+    domain: "Tên miền — năm đầu tiên"
+  },
+
+  en: {
+    responsive: "Responsive design",
+    nav: "Navigation bar",
+    basicMotion: "Basic motion effects",
+    advancedMotion: "Advanced motion effects",
+    social: "Social media links",
+    contact: "Contact section",
+    contactForm: "Contact form",
+    maps: "Google Maps",
+    hours: "Opening hours",
+    gallery: "Image gallery",
+    seo: "Basic SEO optimization",
+    customFeatures: "Custom features",
+    booking: "Booking system",
+    api: "API integration",
+    multilingual: "Multilingual support",
+    online: "Website deployment",
+    domain: "Domain name — first year"
+  }
+
+};
+
+
+/* =====================================================
+   GLOBAL TRANSLATIONS
+===================================================== */
+
+const translations = {
+
+  fr: {
+
+    newOrder: "Nouvelle commande",
+    track: "Suivre ma commande",
+
+    eyebrow: "Nam Anh Studio · Client portal",
+
+    hero:
+      "Votre prochaine présence en ligne commence ici.",
+
+    copy:
+      "Expliquez votre projet avec précision. Nous vous remettrons un lien privé pour suivre chaque étape, sans créer de compte.",
+
+    create:
+      "Créer ma commande",
+
+    follow:
+      "Suivre ma commande",
+
+    simple:
+      "Un parcours simple.",
+
+    brief:
+      "Brief structuré",
+
+    briefDesc:
+      "Votre projet, clairement défini.",
+
+    tariff:
+      "Tarif transparent",
+
+    tariffDesc:
+      "Votre offre et vos options.",
+
+    private:
+      "Suivi privé",
+
+    privateDesc:
+      "Votre progression avec votre code.",
+
+    orderTitle:
+      "Nouvelle commande",
+
+    orderSub:
+      "Présentez les éléments essentiels de votre projet.",
+
+    client:
+      "Informations client",
+
+    name:
+      "Nom complet",
+
+    email:
+      "Email pour les notifications",
+
+    offer:
+      "Choisissez votre offre",
+
+    pagesTitle:
+      "Nombre de pages",
+
+    pages:
+      "Pages souhaitées",
+
+    features:
+      "Fonctionnalités",
+
+    logo:
+      "Logo",
+
+    logoCreation:
+      "Création de logo",
+
+    estimate:
+      "Estimation",
+
+    send:
+      "Envoyer ma commande",
+
+    sending:
+      "Envoi…",
+
+    notice:
+      "Les fonctionnalités disponibles dépendent de l’offre sélectionnée. Les fonctionnalités hors offre restent visibles mais ne peuvent pas être sélectionnées.",
+
+    trackTitle:
+      "Suivre ma commande",
+
+    trackSub:
+      "Entrez votre code de suivi.",
+
+    followBtn:
+      "Suivre",
+
+    trackingCode:
+      "Code de suivi",
+
+    current:
+      "Statut actuel",
+
+    upcoming:
+      "À venir",
+
+    enterCode:
+      "Veuillez entrer votre code de suivi.",
+
+    status: [
+      "Commande reçue",
+      "Confirmation",
+      "Paiement",
+      "Design",
+      "Développement",
+      "Test",
+      "Révision finale",
+      "Livraison"
+    ],
+
+    subject:
+      "Nouvelle commande · Nam Anh Studio",
+
+    unavailable:
+      "Non inclus dans cette offre"
+
+  },
+
+
+  vi: {
+
+    newOrder:
+      "Đơn hàng mới",
+
+    track:
+      "Theo dõi đơn hàng",
+
+    eyebrow:
+      "Nam Anh Studio · Cổng khách hàng",
+
+    hero:
+      "Sự hiện diện trực tuyến tiếp theo của bạn bắt đầu tại đây.",
+
+    copy:
+      "Hãy mô tả chính xác dự án của bạn. Chúng tôi sẽ cung cấp một liên kết riêng để bạn theo dõi từng bước mà không cần tạo tài khoản.",
+
+    create:
+      "Tạo đơn hàng",
+
+    follow:
+      "Theo dõi đơn hàng",
+
+    simple:
+      "Một quy trình đơn giản.",
+
+    brief:
+      "Brief rõ ràng",
+
+    briefDesc:
+      "Dự án của bạn được xác định rõ ràng.",
+
+    tariff:
+      "Giá minh bạch",
+
+    tariffDesc:
+      "Gói dịch vụ và các tùy chọn của bạn.",
+
+    private:
+      "Theo dõi riêng tư",
+
+    privateDesc:
+      "Theo dõi tiến trình bằng mã riêng của bạn.",
+
+    orderTitle:
+      "Đơn hàng mới",
+
+    orderSub:
+      "Cung cấp những thông tin chính của dự án.",
+
+    client:
+      "Thông tin khách hàng",
+
+    name:
+      "Họ và tên",
+
+    email:
+      "Email nhận thông báo",
+
+    offer:
+      "Chọn gói dịch vụ",
+
+    pagesTitle:
+      "Số trang",
+
+    pages:
+      "Số trang mong muốn",
+
+    features:
+      "Tính năng",
+
+    logo:
+      "Logo",
+
+    logoCreation:
+      "Thiết kế logo",
+
+    estimate:
+      "Giá dự kiến",
+
+    send:
+      "Gửi đơn hàng",
+
+    sending:
+      "Đang gửi…",
+
+    notice:
+      "Các tính năng khả dụng phụ thuộc vào gói đã chọn. Các tính năng không thuộc gói vẫn được hiển thị nhưng không thể chọn.",
+
+    trackTitle:
+      "Theo dõi đơn hàng",
+
+    trackSub:
+      "Nhập mã theo dõi của bạn.",
+
+    followBtn:
+      "Theo dõi",
+
+    trackingCode:
+      "Mã theo dõi",
+
+    current:
+      "Trạng thái hiện tại",
+
+    upcoming:
+      "Sắp tới",
+
+    enterCode:
+      "Vui lòng nhập mã theo dõi.",
+
+    status: [
+      "Đã nhận đơn hàng",
+      "Xác nhận",
+      "Thanh toán",
+      "Thiết kế",
+      "Phát triển",
+      "Kiểm tra",
+      "Duyệt lần cuối",
+      "Bàn giao"
+    ],
+
+    subject:
+      "Đơn hàng mới · Nam Anh Studio",
+
+    unavailable:
+      "Không nằm trong gói này"
+
+  },
+
+
+  en: {
+
+    newOrder:
+      "New order",
+
+    track:
+      "Track my order",
+
+    eyebrow:
+      "Nam Anh Studio · Client portal",
+
+    hero:
+      "Your next online presence starts here.",
+
+    copy:
+      "Explain your project precisely. We will provide a private link to follow every step, without creating an account.",
+
+    create:
+      "Create my order",
+
+    follow:
+      "Track my order",
+
+    simple:
+      "A simple journey.",
+
+    brief:
+      "Structured brief",
+
+    briefDesc:
+      "Your project, clearly defined.",
+
+    tariff:
+      "Transparent pricing",
+
+    tariffDesc:
+      "Your package and selected options.",
+
+    private:
+      "Private tracking",
+
+    privateDesc:
+      "Follow your progress with your private code.",
+
+    orderTitle:
+      "New order",
+
+    orderSub:
+      "Provide the essential details of your project.",
+
+    client:
+      "Client information",
+
+    name:
+      "Full name",
+
+    email:
+      "Notification email",
+
+    offer:
+      "Choose your package",
+
+    pagesTitle:
+      "Number of pages",
+
+    pages:
+      "Requested pages",
+
+    features:
+      "Features",
+
+    logo:
+      "Logo",
+
+    logoCreation:
+      "Logo creation",
+
+    estimate:
+      "Estimate",
+
+    send:
+      "Send my order",
+
+    sending:
+      "Sending…",
+
+    notice:
+      "Available features depend on the selected package. Features outside the package remain visible but cannot be selected.",
+
+    trackTitle:
+      "Track my order",
+
+    trackSub:
+      "Enter your tracking code.",
+
+    followBtn:
+      "Track",
+
+    trackingCode:
+      "Tracking code",
+
+    current:
+      "Current status",
+
+    upcoming:
+      "Upcoming",
+
+    enterCode:
+      "Please enter your tracking code.",
+
+    status: [
+      "Order received",
+      "Confirmation",
+      "Payment",
+      "Design",
+      "Development",
+      "Testing",
+      "Final review",
+      "Delivery"
+    ],
+
+    subject:
+      "New order · Nam Anh Studio",
+
+    unavailable:
+      "Not included in this package"
+
+  }
+
+};
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const $ = selector =>
+  document.querySelector(selector);
+
+const $$ = selector =>
+  [...document.querySelectorAll(selector)];
+
+
+let currentPlan = "STARTER";
+let currentLanguage = "fr";
+
+
+/* =====================================================
+   MODALS
+===================================================== */
+
+function openModal(id) {
+
+  $("#" + id).classList.add("open");
+
+  document.body.style.overflow = "hidden";
+}
+
+
+function closeModal(id) {
+
+  $("#" + id).classList.remove("open");
+
+  if (!$(".overlay.open")) {
+    document.body.style.overflow = "";
+  }
+}
+
+
+$("#newOrderBtn").onclick =
+  () => openModal("orderOverlay");
+
+$("#heroOrderBtn").onclick =
+  () => openModal("orderOverlay");
+
+$("#trackBtn").onclick =
+  () => openModal("trackOverlay");
+
+$("#heroTrackBtn").onclick =
+  () => openModal("trackOverlay");
+
+
+$$("[data-close]").forEach(button => {
+
+  button.onclick = () => {
+    closeModal(button.dataset.close);
+  };
+
+});
+
+
+$$(".overlay").forEach(overlay => {
+
+  overlay.addEventListener("click", event => {
+
+    if (event.target === overlay) {
+      closeModal(overlay.id);
+    }
+
+  });
+
+});
+
+
+document.addEventListener("keydown", event => {
+
+  if (event.key === "Escape") {
+
+    $$(".overlay.open").forEach(overlay => {
+      closeModal(overlay.id);
+    });
+
+  }
+
+});
+
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+function renderFeatures() {
+
+  const wrap = $("#options");
+
+  const labels =
+    featureTranslations[currentLanguage];
+
+  wrap.innerHTML = "";
+
+  Object.entries(labels).forEach(([key, label]) => {
+
+    const enabled =
+      plans[currentPlan].features.includes(key);
+
+    const labelElement =
+      document.createElement("label");
+
+    labelElement.className =
+      "option" +
+      (enabled ? "" : " locked");
+
+    labelElement.innerHTML = `
+      <input
+        type="checkbox"
+        name="feature_${key}"
+        value="${label}"
+        ${enabled ? "checked" : "disabled"}>
+
+      <span>
+        ${label}
+
+        ${
+          enabled
+            ? ""
+            : `<small>${translations[currentLanguage].unavailable}</small>`
+        }
+      </span>
+    `;
+
+    wrap.appendChild(labelElement);
+
+  });
+
+  updatePrice();
+
+}
+
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+function updatePrice() {
+
+  let price =
+    plans[currentPlan].price;
+
+  if ($("#logoOption").checked) {
+    price += 2;
+  }
+
+  const t =
+    translations[currentLanguage];
+
+  $("#priceDisplay").textContent =
+    currentPlan === "CUSTOM"
+      ? `€${price}+`
+      : `€${price}`;
+
+  $("#packageField").value =
+    currentPlan;
+
+  $("#priceField").value =
+    currentPlan === "CUSTOM"
+      ? `€${price}+`
+      : `€${price}`;
+
+}
+
+
+/* =====================================================
+   PACKAGE SELECTOR
+===================================================== */
+
+$$(".plan").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    $$(".plan").forEach(plan => {
+      plan.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    currentPlan =
+      button.dataset.plan;
+
+    renderFeatures();
+
+  });
+
+});
+
+
+$("#logoOption").addEventListener(
+  "change",
+  updatePrice
+);
+
+
+/* =====================================================
+   ORDER SUBMIT
+===================================================== */
+
+$("#orderForm").addEventListener(
+  "submit",
+  event => {
+
+    const selected =
+      $$("#options input:checked")
+        .map(input => input.value);
+
+    $("#featuresField").value =
+      selected.join(", ");
+
+    const button =
+      event.submitter;
+
+    const originalText =
+      translations[currentLanguage].send;
+
+    button.disabled = true;
+
+    button.textContent =
+      translations[currentLanguage].sending;
+
+    /*
+      Formspree handles the actual submission.
+      This timeout only restores the button state
+      if the browser stays on the page.
+    */
+
+    setTimeout(() => {
+
+      button.disabled = false;
+
+      button.textContent =
+        originalText;
+
+    }, 4000);
+
+  }
+);
+
+
+/* =====================================================
+   TRACKING
+===================================================== */
+
+function showTracking(code) {
+
+  const clean =
+    code.trim().toUpperCase();
+
+  const t =
+    translations[currentLanguage];
+
+  if (!clean) {
+
+    showToast(t.enterCode);
+
+    return;
+  }
+
+  $("#resultCode").textContent =
+    clean;
+
+  $("#timeline").innerHTML =
+    t.status.map((status, index) => {
+
+      return `
+        <div class="timeline-item ${index === 0 ? "active" : ""}">
+
+          <div class="timeline-dot"></div>
+
+          <div>
+
+            <strong>
+              ${status}
+            </strong>
+
+            <span>
+              ${
+                index === 0
+                  ? t.current
+                  : t.upcoming
+              }
+            </span>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+  $("#trackResult")
+    .classList
+    .add("show");
+
+}
+
+
+$("#trackSubmit").onclick =
+  () => showTracking(
+    $("#trackingCode").value
+  );
+
+
+$("#trackingCode").addEventListener(
+  "keydown",
+  event => {
+
+    if (event.key === "Enter") {
+
+      showTracking(
+        event.target.value
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+  const toast =
+    $("#toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+  window.toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    }, 2800);
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+const savedTheme =
+  localStorage.getItem("nas-theme");
+
+if (
+  savedTheme === "light" ||
+  savedTheme === "dark"
+) {
+
+  document.documentElement.dataset.theme =
+    savedTheme;
+
+}
+
+
+function updateThemeUI() {
+
+  const light =
+    document.documentElement.dataset.theme ===
+    "light";
+
+  $("#themeBtn").textContent =
+    light ? "☀" : "☾";
+
+  $("#themeBtn").title =
+    light
+      ? "Passer en mode sombre"
+      : "Passer en mode clair";
+
+  $("#brandLogo").src =
+    light
+      ? "https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/light-mode-logo-ch-nh_orig.png"
+      : "https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-logo-ch-nh_orig.png";
+
+}
+
+
+$("#themeBtn").onclick = () => {
+
+  const next =
+    document.documentElement.dataset.theme ===
+    "dark"
+      ? "light"
+      : "dark";
+
+  document.documentElement.dataset.theme =
+    next;
+
+  localStorage.setItem(
+    "nas-theme",
+    next
+  );
+
+  updateThemeUI();
+
+};
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+function applyLanguage(lang) {
+
+  const t =
+    translations[lang];
+
+  currentLanguage =
+    lang;
+
+  /* NAV */
+
+  $("#newOrderBtn").textContent =
+    t.newOrder;
+
+  $("#trackBtn").textContent =
+    t.track;
+
+
+  /* HERO */
+
+  $(".eyebrow").textContent =
+    t.eyebrow;
+
+  $("#heroTitle").textContent =
+    t.hero;
+
+  $("#heroCopy").textContent =
+    t.copy;
+
+  $("#heroOrderBtn").textContent =
+    t.create;
+
+  $("#heroTrackBtn").textContent =
+    t.follow;
+
+
+  /* HERO CARD */
+
+  $("#simpleTitle").textContent =
+    t.simple;
+
+  $("#briefTitle").textContent =
+    t.brief;
+
+  $("#briefDescription").textContent =
+    t.briefDesc;
+
+  $("#tariffTitle").textContent =
+    t.tariff;
+
+  $("#tariffDescription").textContent =
+    t.tariffDesc;
+
+  $("#privateTitle").textContent =
+    t.private;
+
+  $("#privateDescription").textContent =
+    t.privateDesc;
+
+
+  /* PROCESS */
+
+  $("#processBrief").textContent =
+    t.brief;
+
+  $("#processTariff").textContent =
+    t.tariff;
+
+  $("#processPrivate").textContent =
+    t.private;
+
+
+  /* ORDER */
+
+  $("#orderTitle").textContent =
+    t.orderTitle;
+
+  $("#orderSubtitle").textContent =
+    t.orderSub;
+
+  $("#clientSection").textContent =
+    t.client;
+
+  $("#nameLabel").textContent =
+    t.name;
+
+  $("#emailLabel").textContent =
+    t.email;
+
+  $("#offerSection").textContent =
+    t.offer;
+
+  $("#pagesSection").textContent =
+    t.pagesTitle;
+
+  $("#pagesLabel").textContent =
+    t.pages;
+
+  $("#featuresSection").textContent =
+    t.features;
+
+  $("#logoSection").textContent =
+    t.logo;
+
+  $("#logoLabel").textContent =
+    t.logoCreation;
+
+  $("#estimateLabel").textContent =
+    t.estimate;
+
+  $("#sendButton").textContent =
+    t.send;
+
+  $("#orderNotice").textContent =
+    t.notice;
+
+
+  /* TRACKING */
+
+  $("#trackTitle").textContent =
+    t.trackTitle;
+
+  $("#trackSubtitle").textContent =
+    t.trackSub;
+
+  $("#trackSubmit").textContent =
+    t.followBtn;
+
+  $("#trackingCodeLabel").textContent =
+    t.trackingCode;
+
+
+  /* FORM SUBJECT */
+
+  $("#subjectField").value =
+    t.subject;
+
+
+  /* PAGE OPTIONS */
+
+  updatePageOptions(lang);
+
+  /* FEATURES */
+
+  renderFeatures();
+
+}
+
+
+/* =====================================================
+   PAGE OPTION TRANSLATION
+===================================================== */
+
+function updatePageOptions(lang) {
+
+  const select =
+    $("#pages");
+
+  const values = {
+
+    fr: [
+      "1 page",
+      "3–5 pages",
+      "5–8 pages"
+    ],
+
+    vi: [
+      "1 trang",
+      "3–5 trang",
+      "5–8 trang"
+    ],
+
+    en: [
+      "1 page",
+      "3–5 pages",
+      "5–8 pages"
+    ]
+
+  };
+
+  [...select.options].forEach(
+    (option, index) => {
+
+      option.textContent =
+        values[lang][index];
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LANGUAGE SELECT
+===================================================== */
+
+$("#languageSelect")
+  .addEventListener(
+    "change",
+    event => {
+
+      const lang =
+        event.target.value;
+
+      localStorage.setItem(
+        "nas-language",
+        lang
+      );
+
+      applyLanguage(lang);
+
+    }
+  );
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+const savedLanguage =
+  localStorage.getItem(
+    "nas-language"
+  ) || "fr";
+
+$("#languageSelect").value =
+  savedLanguage;
+
+applyLanguage(
+  savedLanguage
+);
+
+updateThemeUI();
+
+</script>
+
+</body>
+</html>
