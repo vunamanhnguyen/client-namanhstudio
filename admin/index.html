@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+
+  <title>Admin · Nam Anh Studio</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-app-icon-favicon2_orig.png"
+  >
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #000000;
+      --surface: #090909;
+      --surface-2: #101010;
+      --surface-3: #171717;
+      --line: #242424;
+      --line-strong: #383838;
+
+      --text: #ffffff;
+      --muted: #9a9a9a;
+      --muted-2: #6d6d6d;
+
+      --success: #8fd18f;
+      --warning: #e4c477;
+      --danger: #e18b8b;
+
+      --radius: 14px;
+      --shadow: 0 25px 80px rgba(0,0,0,.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    .login-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+
+      display: grid;
+      place-items: center;
+
+      padding: 20px;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(255,255,255,.08),
+          transparent 38%
+        ),
+        #000;
+    }
+
+    .login-card {
+      width: min(430px, 100%);
+
+      padding: 38px;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+
+      background: var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .login-logo {
+      width: 170px;
+      display: block;
+      margin: 0 auto 32px;
+    }
+
+    .login-card h1 {
+      margin: 0;
+      text-align: center;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
+      letter-spacing: -.04em;
+    }
+
+    .login-card p {
+      margin: 8px 0 28px;
+
+      text-align: center;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .login-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .login-field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .login-field input {
+      width: 100%;
+      min-height: 50px;
+
+      padding: 0 14px;
+
+      border: 1px solid var(--line);
+      border-radius: 11px;
+
+      outline: none;
+
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .login-field input:focus {
+      border-color: var(--line-strong);
+    }
+
+    .login-button {
+      width: 100%;
+      min-height: 50px;
+
+      margin-top: 16px;
+
+      border: 0;
+      border-radius: 11px;
+
+      background: #fff;
+      color: #000;
+
+      font-weight: 700;
+    }
+
+    .login-error {
+      min-height: 20px;
+
+      margin-top: 12px;
+
+      color: var(--danger);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* =========================
+       APP
+    ========================= */
+
+    .app {
+      display: none;
+    }
+
+    .app.visible {
+      display: block;
+    }
+
+    /* =========================
+       NAV
+    ========================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      height: 72px;
+
+      border-bottom: 1px solid var(--line);
+
+      background: rgba(0,0,0,.88);
+
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      width: min(1320px, calc(100% - 40px));
+      height: 100%;
+
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand img {
+      width: 145px;
+      display: block;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .nav-btn {
+      min-height: 40px;
+
+      padding: 0 14px;
+
+      border: 1px solid var(--line);
+      border-radius: 9px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--line-strong);
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .container {
+      width: min(1320px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .page-header {
+      padding: 55px 0 30px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      gap: 30px;
+    }
+
+    .eyebrow {
+      margin-bottom: 10px;
+
+      color: var(--muted-2);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    .page-header h1 {
+      margin: 0;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1;
+
+      letter-spacing: -.055em;
+    }
+
+    .page-header p {
+      max-width: 620px;
+
+      margin: 15px 0 0;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+
+      margin-bottom: 45px;
+    }
+
+    .stat {
+      padding: 24px;
+
+      border-left: 1px solid var(--line);
+    }
+
+    .stat:first-child {
+      border-left: 0;
+    }
+
+    .stat-label {
+      color: var(--muted-2);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       TABS
+    ========================= */
+
+    .tabs {
+      display: flex;
+      gap: 5px;
+
+      margin-bottom: 22px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tab {
+      position: relative;
+
+      padding: 13px 17px;
+
+      border: 0;
+
+      background: transparent;
+      color: var(--muted);
+
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      color: var(--text);
+    }
+
+    .tab.active::after {
+      content: "";
+
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -1px;
+
+      height: 2px;
+
+      background: #fff;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+
+      margin-bottom: 15px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+
+      letter-spacing: -.035em;
+    }
+
+    .search {
+      width: min(280px, 100%);
+      min-height: 42px;
+
+      padding: 0 13px;
+
+      border: 1px solid var(--line);
+      border-radius: 9px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      outline: none;
+
+      font-size: 12px;
+    }
+
+    /* =========================
+       ORDER CARDS
+    ========================= */
+
+    .orders {
+      display: grid;
+      gap: 12px;
+    }
+
+    .order-card {
+      border: 1px solid var(--line);
+      border-radius: 15px;
+
+      background: var(--surface);
+
+      overflow: hidden;
+    }
+
+    .order-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      gap: 20px;
+
+      padding: 20px 22px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .order-code {
+      color: var(--muted-2);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .order-name {
+      margin-top: 5px;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .order-email {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .order-top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+
+      min-height: 28px;
+
+      padding: 0 10px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge.status {
+      color: var(--warning);
+      border-color: #51472c;
+    }
+
+    .badge.done {
+      color: var(--success);
+      border-color: #304930;
+    }
+
+    .order-body {
+      padding: 22px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      border: 1px solid var(--line);
+      border-radius: 11px;
+
+      overflow: hidden;
+
+      margin-bottom: 18px;
+    }
+
+    .detail {
+      padding: 14px;
+
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .detail-label {
+      color: var(--muted-2);
+
+      font-size: 9px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .detail-value {
+      margin-top: 5px;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .features-title {
+      margin-bottom: 10px;
+
+      color: var(--muted-2);
+
+      font-size: 9px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .feature {
+      padding: 6px 9px;
+
+      border: 1px solid var(--line);
+      border-radius: 7px;
+
+      background: var(--surface-2);
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .order-actions {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 20px;
+
+      padding-top: 18px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .action-btn {
+      min-height: 39px;
+
+      padding: 0 13px;
+
+      border: 1px solid var(--line);
+      border-radius: 8px;
+
+      background: var(--surface-2);
+      color: var(--text);
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .action-btn:hover {
+      border-color: var(--line-strong);
+    }
+
+    .action-btn.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .action-btn.success {
+      color: var(--success);
+      border-color: #304930;
+    }
+
+    .action-btn.danger {
+      color: var(--danger);
+    }
+
+    /* =========================
+       CLIENTS
+    ========================= */
+
+    .client-list {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+
+      overflow: hidden;
+
+      background: var(--surface);
+    }
+
+    .client-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1.5fr .7fr .7fr auto;
+
+      align-items: center;
+
+      gap: 20px;
+
+      padding: 17px 19px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .client-row:last-child {
+      border-bottom: 0;
+    }
+
+    .client-name {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .client-email {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .client-meta {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .client-status {
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .client-status.has-order {
+      color: var(--success);
+    }
+
+    .client-status.no-order {
+      color: var(--muted-2);
+    }
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty {
+      padding: 65px 25px;
+
+      border: 1px dashed var(--line-strong);
+      border-radius: 14px;
+
+      text-align: center;
+
+      color: var(--muted);
+    }
+
+    .empty strong {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: var(--text);
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: 500;
+
+      display: none;
+      place-items: center;
+
+      padding: 20px;
+
+      background: rgba(0,0,0,.78);
+
+      backdrop-filter: blur(12px);
+    }
+
+    .overlay.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(760px, 100%);
+      max-height: calc(100vh - 40px);
+
+      overflow-y: auto;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+
+      background: var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+
+      display: flex;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 20px 22px;
+
+      border-bottom: 1px solid var(--line);
+
+      background: rgba(9,9,9,.94);
+
+      backdrop-filter: blur(15px);
+    }
+
+    .modal-head h2 {
+      margin: 0;
+
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 23px;
+      letter-spacing: -.035em;
+    }
+
+    .modal-head p {
+      margin: 5px 0 0;
+
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .close {
+      width: 38px;
+      height: 38px;
+
+      flex: 0 0 auto;
+
+      border: 1px solid var(--line);
+      border-radius: 9px;
+
+      background: var(--surface-2);
+      color: var(--text);
+
+      font-size: 20px;
+    }
+
+    .modal-body {
+      padding: 22px;
+    }
+
+    .edit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+
+      padding: 11px 12px;
+
+      border: 1px solid var(--line);
+      border-radius: 9px;
+
+      outline: none;
+
+      background: var(--surface-2);
+      color: var(--text);
+
+      font-size: 12px;
+    }
+
+    .field input,
+    .field select {
+      min-height: 44px;
+    }
+
+    .field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--line-strong);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+
+      gap: 8px;
+
+      margin-top: 22px;
+
+      padding-top: 18px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 1000;
+
+      display: none;
+
+      max-width: 390px;
+
+      padding: 13px 16px;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      box-shadow: var(--shadow);
+
+      font-size: 12px;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(3) {
+        border-left: 0;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .detail:nth-child(4n) {
+        border-right: 1px solid var(--line);
+      }
+
+      .detail:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .client-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .container,
+      .nav-inner {
+        width: calc(100% - 24px);
+      }
+
+      .nav {
+        height: 65px;
+      }
+
+      .brand img {
+        width: 125px;
+      }
+
+      .nav-right .nav-btn {
+        padding: 0 9px;
+      }
+
+      .page-header {
+        display: block;
+        padding-top: 38px;
+      }
+
+      .header-actions {
+        margin-top: 20px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        padding: 17px;
+      }
+
+      .stat-value {
+        font-size: 24px;
+      }
+
+      .tabs {
+        overflow-x: auto;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .search {
+        margin-top: 12px;
+        width: 100%;
+      }
+
+      .order-top {
+        grid-template-columns: 1fr;
+      }
+
+      .order-top-right {
+        justify-content: flex-start;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail,
+      .detail:nth-child(2n),
+      .detail:nth-child(4n) {
+        border-right: 0;
+      }
+
+      .edit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .client-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .login-card {
+        padding: 28px 22px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       LOGIN
+  ====================================================== -->
+
+  <section class="login-screen" id="loginScreen">
+
+    <div class="login-card">
+
+      <img
+        class="login-logo"
+        src="https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-logo-ch-nh_orig.png"
+        alt="Nam Anh Studio"
+      >
+
+      <h1>Administration</h1>
+
+      <p>
+        Espace privé · Nam Anh Studio
+      </p>
+
+      <form id="loginForm">
+
+        <div class="login-field">
+
+          <label for="adminPassword">
+            Mot de passe administrateur
+          </label>
+
+          <input
+            id="adminPassword"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Entrez votre mot de passe"
+            required
+          >
+
+        </div>
+
+        <button class="login-button" type="submit">
+          Accéder à l'administration
+        </button>
+
+        <div class="login-error" id="loginError"></div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       ADMIN APP
+  ====================================================== -->
+
+  <div class="app" id="app">
+
+    <!-- NAV -->
+
+    <header class="nav">
+
+      <div class="nav-inner">
+
+        <a class="brand" href="#">
+          <img
+            src="https://logo-namanhstudio.weebly.com/uploads/1/5/5/3/155356283/dark-mode-logo-ch-nh_orig.png"
+            alt="Nam Anh Studio"
+          >
+        </a>
+
+        <div class="nav-right">
+
+          <button class="nav-btn" id="refreshBtn">
+            Actualiser
+          </button>
+
+          <button class="nav-btn" id="logoutBtn">
+            Déconnexion
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+      <!-- HEADER -->
+
+      <section class="page-header">
+
+        <div>
+
+          <div class="eyebrow">
+            Nam Anh Studio · Admin Portal
+          </div>
+
+          <h1>
+            Administration
+          </h1>
+
+          <p>
+            Gérez les clients, les commandes, les tarifs et
+            l'avancement des projets depuis un seul espace.
+          </p>
+
+        </div>
+
+        <div class="header-actions">
+
+          <button class="action-btn primary" id="newClientBtn">
+            + Ajouter un client
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- STATS -->
+
+      <section class="stats">
+
+        <div class="stat">
+          <div class="stat-label">
+            Clients
+          </div>
+          <div class="stat-value" id="statClients">
+            0
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            Commandes
+          </div>
+          <div class="stat-value" id="statOrders">
+            0
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            En cours
+          </div>
+          <div class="stat-value" id="statActive">
+            0
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            Terminées
+          </div>
+          <div class="stat-value" id="statDone">
+            0
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" data-tab="active">
+          Commandes en cours
+        </button>
+
+        <button class="tab" data-tab="done">
+          Terminées
+        </button>
+
+        <button class="tab" data-tab="clients">
+          Clients
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           ACTIVE ORDERS
+      ================================================== -->
+
+      <section class="panel active" id="panel-active">
+
+        <div class="section-head">
+
+          <h2>
+            Commandes en cours
+          </h2>
+
+          <input
+            class="search"
+            id="activeSearch"
+            type="search"
+            placeholder="Rechercher une commande..."
+          >
+
+        </div>
+
+        <div class="orders" id="activeOrders"></div>
+
+      </section>
+
+
+      <!-- =================================================
+           COMPLETED ORDERS
+      ================================================== -->
+
+      <section class="panel" id="panel-done">
+
+        <div class="section-head">
+
+          <h2>
+            Commandes terminées
+          </h2>
+
+          <input
+            class="search"
+            id="doneSearch"
+            type="search"
+            placeholder="Rechercher une commande..."
+          >
+
+        </div>
+
+        <div class="orders" id="doneOrders"></div>
+
+      </section>
+
+
+      <!-- =================================================
+           CLIENTS
+      ================================================== -->
+
+      <section class="panel" id="panel-clients">
+
+        <div class="section-head">
+
+          <h2>
+            Tous les clients
+          </h2>
+
+          <input
+            class="search"
+            id="clientSearch"
+            type="search"
+            placeholder="Rechercher un client..."
+          >
+
+        </div>
+
+        <div class="client-list" id="clientList"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       EDIT ORDER MODAL
+  ====================================================== -->
+
+  <div class="overlay" id="editOverlay">
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <div>
+          <h2>
+            Modifier la commande
+          </h2>
+
+          <p>
+            Modifiez les informations administratives du projet.
+          </p>
+        </div>
+
+        <button class="close" data-close="editOverlay">
+          ×
+        </button>
+
+      </div>
+
+
+      <form class="modal-body" id="editForm">
+
+        <input type="hidden" id="editId">
+
+        <div class="edit-grid">
+
+          <div class="field">
+            <label>
+              Client
+            </label>
+
+            <input id="editName" type="text">
+          </div>
+
+
+          <div class="field">
+            <label>
+              Email
+            </label>
+
+            <input id="editEmail" type="email">
+          </div>
+
+
+          <div class="field">
+            <label>
+              Formule
+            </label>
+
+            <select id="editPlan">
+
+              <option value="STARTER">
+                STARTER
+              </option>
+
+              <option value="ESSENTIAL">
+                ESSENTIAL
+              </option>
+
+              <option value="BUSINESS">
+                BUSINESS
+              </option>
+
+              <option value="CUSTOM">
+                CUSTOM
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+            <label>
+              Prix
+            </label>
+
+            <input
+              id="editPrice"
+              type="number"
+              min="0"
+              step="1"
+            >
+          </div>
+
+
+          <div class="field">
+            <label>
+              Nombre de pages
+            </label>
+
+            <input id="editPages" type="text">
+          </div>
+
+
+          <div class="field">
+            <label>
+              Statut
+            </label>
+
+            <select id="editStatus">
+
+              <option>
+                Commande reçue
+              </option>
+
+              <option>
+                Confirmation
+              </option>
+
+              <option>
+                Paiement
+              </option>
+
+              <option>
+                Design
+              </option>
+
+              <option>
+                Development
+              </option>
+
+              <option>
+                Test
+              </option>
+
+              <option>
+                Final Review
+              </option>
+
+              <option>
+                Delivery
+              </option>
+
+              <option>
+                Terminé
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label>
+              Fonctionnalités
+            </label>
+
+            <textarea id="editFeatures"></textarea>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label>
+              Notes administratives
+            </label>
+
+            <textarea
+              id="editNotes"
+              placeholder="Notes internes..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="action-btn"
+            data-close="editOverlay"
+          >
+            Annuler
+          </button>
+
+          <button
+            type="submit"
+            class="action-btn primary"
+          >
+            Enregistrer
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       NEW CLIENT MODAL
+  ====================================================== -->
+
+  <div class="overlay" id="clientOverlay">
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <div>
+          <h2>
+            Ajouter un client
+          </h2>
+
+          <p>
+            Ajoutez un client même s'il n'a pas encore passé commande.
+          </p>
+        </div>
+
+        <button class="close" data-close="clientOverlay">
+          ×
+        </button>
+
+      </div>
+
+
+      <form class="modal-body" id="clientForm">
+
+        <div class="edit-grid">
+
+          <div class="field">
+            <label>
+              Nom complet
+            </label>
+
+            <input
+              id="clientName"
+              required
+            >
+          </div>
+
+
+          <div class="field">
+            <label>
+              Email
+            </label>
+
+            <input
+              id="clientEmail"
+              type="email"
+              required
+            >
+          </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="action-btn"
+            data-close="clientOverlay"
+          >
+            Annuler
+          </button>
+
+          <button
+            type="submit"
+            class="action-btn primary"
+          >
+            Ajouter le client
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div class="toast" id="toast"></div>
+
+
+  <script>
+
+    /*
+     * =====================================================
+     * CONFIGURATION
+     * =====================================================
+     *
+     * IMPORTANT :
+     * Ce fichier est une interface front-end.
+     *
+     * Les données sont actuellement stockées dans localStorage
+     * uniquement pour permettre de tester l'interface.
+     *
+     * Pour une vraie utilisation :
+     *
+     * Client → Formspree / Worker → D1
+     *
+     * Admin → Worker → D1
+     *
+     * L'authentification réelle doit être faite côté serveur
+     * ou avec Cloudflare Access.
+     */
+
+    const STORAGE_ORDERS = "nas_admin_orders_v1";
+    const STORAGE_CLIENTS = "nas_admin_clients_v1";
+
+
+    /*
+     * =====================================================
+     * ÉTAT INITIAL
+     * =====================================================
+     */
+
+    const defaultOrders = [];
+
+    const defaultClients = [];
+
+
+    /*
+     * =====================================================
+     * UTILITAIRES
+     * =====================================================
+     */
+
+    const $ = selector =>
+      document.querySelector(selector);
+
+    const $$ = selector =>
+      [...document.querySelectorAll(selector)];
+
+
+    function escapeHTML(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    function getOrders() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(STORAGE_ORDERS)
+        ) || [];
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function getClients() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(STORAGE_CLIENTS)
+        ) || [];
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveOrders(orders) {
+
+      localStorage.setItem(
+        STORAGE_ORDERS,
+        JSON.stringify(orders)
+      );
+
+    }
+
+
+    function saveClients(clients) {
+
+      localStorage.setItem(
+        STORAGE_CLIENTS,
+        JSON.stringify(clients)
+      );
+
+    }
+
+
+    function generateId(prefix = "NAS") {
+
+      const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+      let code = "";
+
+      for (let i = 0; i < 5; i++) {
+
+        code += chars[
+          Math.floor(Math.random() * chars.length)
+        ];
+
+      }
+
+      return `${prefix}-2026-${code}`;
+
+    }
+
+
+    function showToast(message) {
+
+      const toast = $("#toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(window.toastTimer);
+
+      window.toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 2800);
+
+    }
+
+
+    /*
+     * =====================================================
+     * LOGIN
+     * =====================================================
+     *
+     * Le mot de passe NE DOIT PAS être vérifié ici
+     * dans une vraie application.
+     *
+     * Ici, nous utilisons simplement une session locale
+     * afin de permettre la prévisualisation de l'interface.
+     *
+     * Remplacez cette partie par Cloudflare Access / Worker.
+     */
+
+    $("#loginForm").addEventListener(
+      "submit",
+      function(e) {
+
+        e.preventDefault();
+
+        const password =
+          $("#adminPassword").value.trim();
+
+        /*
+         * Pour le prototype :
+         *
+         * Le champ accepte le mot de passe fourni par
+         * l'administrateur, mais la validation réelle
+         * doit être déplacée côté serveur.
+         *
+         * Cette version vérifie simplement que le champ
+         * n'est pas vide.
+         */
+
+        if (!password) {
+
+          $("#loginError").textContent =
+            "Veuillez entrer votre mot de passe.";
+
+          return;
+
+        }
+
+        sessionStorage.setItem(
+          "nas_admin_authenticated",
+          "1"
+        );
+
+        $("#loginScreen").style.display = "none";
+
+        $("#app").classList.add("visible");
+
+        renderAll();
+
+      }
+    );
+
+
+    $("#logoutBtn").addEventListener(
+      "click",
+      function() {
+
+        sessionStorage.removeItem(
+          "nas_admin_authenticated"
+        );
+
+        location.reload();
+
+      }
+    );
+
+
+    /*
+     * =====================================================
+     * MODALS
+     * =====================================================
+     */
+
+    function openModal(id) {
+
+      $("#" + id).classList.add("open");
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeModal(id) {
+
+      $("#" + id).classList.remove("open");
+
+      if (!$(".overlay.open")) {
+
+        document.body.style.overflow = "";
+
+      }
+
+    }
+
+
+    $$("[data-close]").forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => closeModal(button.dataset.close)
+      );
+
+    });
+
+
+    $$(".overlay").forEach(overlay => {
+
+      overlay.addEventListener(
+        "click",
+        e => {
+
+          if (e.target === overlay) {
+
+            closeModal(overlay.id);
+
+          }
+
+        }
+      );
+
+    });
+
+
+    document.addEventListener(
+      "keydown",
+      e => {
+
+        if (e.key === "Escape") {
+
+          $$(".overlay.open").forEach(
+            overlay => closeModal(overlay.id)
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     * =====================================================
+     * TABS
+     * =====================================================
+     */
+
+    $$(".tab").forEach(tab => {
+
+      tab.addEventListener(
+        "click",
+        () => {
+
+          $$(".tab").forEach(
+            t => t.classList.remove("active")
+          );
+
+          $$(".panel").forEach(
+            panel => panel.classList.remove("active")
+          );
+
+          tab.classList.add("active");
+
+          $("#panel-" + tab.dataset.tab)
+            .classList.add("active");
+
+        }
+      );
+
+    });
+
+
+    /*
+     * =====================================================
+     * ORDER CARD
+     * =====================================================
+     */
+
+    function orderCard(order) {
+
+      const isDone =
+        order.status === "Terminé";
+
+      const features =
+        Array.isArray(order.features)
+          ? order.features
+          : String(order.features || "")
+              .split(",")
+              .map(x => x.trim())
+              .filter(Boolean);
+
+      return `
+
+        <article class="order-card">
+
+          <div class="order-top">
+
+            <div>
+
+              <div class="order-code">
+                ${escapeHTML(order.code)}
+              </div>
+
+              <div class="order-name">
+                ${escapeHTML(order.name)}
+              </div>
+
+              <div class="order-email">
+                ${escapeHTML(order.email)}
+              </div>
+
+            </div>
+
+
+            <div class="order-top-right">
+
+              <span class="badge">
+                ${escapeHTML(order.plan)}
+              </span>
+
+              <span class="badge ${isDone ? "done" : "status"}">
+                ${escapeHTML(order.status)}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="order-body">
+
+            <div class="detail-grid">
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Date
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(order.date || "—")}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Pages
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(order.pages || "—")}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Prix
+                </div>
+
+                <div class="detail-value">
+                  €${escapeHTML(order.price ?? "0")}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Logo
+                </div>
+
+                <div class="detail-value">
+                  ${order.logo ? "Oui · +2 €" : "Non"}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Dernière modification
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(order.updated || "—")}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Révisions
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(order.revisions || "—")}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Domaine
+                </div>
+
+                <div class="detail-value">
+                  ${order.domain ? "Inclus" : "—"}
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  Source
+                </div>
+
+                <div class="detail-value">
+                  ${escapeHTML(order.source || "Client portal")}
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="features-title">
+              Fonctionnalités sélectionnées
+            </div>
+
+
+            <div class="features">
+
+              ${
+                features.length
+                ? features.map(feature => `
+                    <span class="feature">
+                      ${escapeHTML(feature)}
+                    </span>
+                  `).join("")
+                : `
+                    <span class="feature">
+                      Aucune fonctionnalité
+                    </span>
+                  `
+              }
+
+            </div>
+
+
+            ${
+              order.notes
+              ? `
+                <div
+                  style="
+                    margin-top:18px;
+                    padding:14px;
+                    border:1px solid var(--line);
+                    border-radius:10px;
+                    background:var(--surface-2);
+                  "
+                >
+                  <div class="features-title">
+                    Notes administratives
+                  </div>
+
+                  <div style="
+                    color:var(--muted);
+                    font-size:12px;
+                  ">
+                    ${escapeHTML(order.notes)}
+                  </div>
+                </div>
+              `
+              : ""
+            }
+
+
+            <div class="order-actions">
+
+              <button
+                class="action-btn primary"
+                onclick="editOrder('${escapeHTML(order.id)}')"
+              >
+                Modifier
+              </button>
+
+
+              ${
+                !isDone
+                ? `
+                  <button
+                    class="action-btn success"
+                    onclick="markDone('${escapeHTML(order.id)}')"
+                  >
+                    ✓ Marquer comme terminé
+                  </button>
+                `
+                : `
+                  <button
+                    class="action-btn"
+                    onclick="reopenOrder('${escapeHTML(order.id)}')"
+                  >
+                    Réouvrir
+                  </button>
+                `
+              }
+
+
+              <button
+                class="action-btn danger"
+                onclick="deleteOrder('${escapeHTML(order.id)}')"
+              >
+                Supprimer
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /*
+     * =====================================================
+     * RENDER ORDERS
+     * =====================================================
+     */
+
+    function renderOrders() {
+
+      const orders = getOrders();
+
+      const active =
+        orders.filter(
+          order => order.status !== "Terminé"
+        );
+
+      const done =
+        orders.filter(
+          order => order.status === "Terminé"
+        );
+
+
+      renderOrderList(
+        active,
+        $("#activeOrders"),
+        $("#activeSearch").value
+      );
+
+
+      renderOrderList(
+        done,
+        $("#doneOrders"),
+        $("#doneSearch").value
+      );
+
+
+      $("#statOrders").textContent =
+        orders.length;
+
+      $("#statActive").textContent =
+        active.length;
+
+      $("#statDone").textContent =
+        done.length;
+
+    }
+
+
+    function renderOrderList(
+      orders,
+      container,
+      search = ""
+    ) {
+
+      const query =
+        search.trim().toLowerCase();
+
+      const filtered =
+        orders.filter(order => {
+
+          const text = [
+
+            order.code,
+            order.name,
+            order.email,
+            order.plan,
+            order.status,
+            order.pages
+
+          ]
+          .join(" ")
+          .toLowerCase();
+
+          return text.includes(query);
+
+        });
+
+
+      if (!filtered.length) {
+
+        container.innerHTML = `
+
+          <div class="empty">
+
+            <strong>
+              Aucune commande
+            </strong>
+
+            ${
+              query
+              ? "Aucun résultat pour cette recherche."
+              : "Les commandes apparaîtront ici."
+
+            }
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        filtered
+          .map(orderCard)
+          .join("");
+
+    }
+
+
+    /*
+     * =====================================================
+     * CLIENTS
+     * =====================================================
+     */
+
+    function renderClients() {
+
+      const clients = getClients();
+
+      const orders = getOrders();
+
+      const search =
+        $("#clientSearch").value
+          .trim()
+          .toLowerCase();
+
+
+      const filtered =
+        clients.filter(client => {
+
+          const text =
+            `${client.name} ${client.email}`
+              .toLowerCase();
+
+          return text.includes(search);
+
+        });
+
+
+      if (!filtered.length) {
+
+        $("#clientList").innerHTML = `
+
+          <div class="empty">
+
+            <strong>
+              Aucun client
+            </strong>
+
+            ${
+              search
+              ? "Aucun résultat pour cette recherche."
+              : "Ajoutez votre premier client."
+            }
+
+          </div>
+
+        `;
+
+      } else {
+
+        $("#clientList").innerHTML = `
+
+          ${filtered.map(client => {
+
+            const clientOrders =
+              orders.filter(
+                order =>
+                  order.email.toLowerCase() ===
+                  client.email.toLowerCase()
+              );
+
+            const hasOrder =
+              clientOrders.length > 0;
+
+            const lastOrder =
+              clientOrders[clientOrders.length - 1];
+
+
+            return `
+
+              <div class="client-row">
+
+                <div>
+                  <div class="client-name">
+                    ${escapeHTML(client.name)}
+                  </div>
+
+                  <div class="client-email">
+                    ${escapeHTML(client.email)}
+                  </div>
+                </div>
+
+
+                <div class="client-meta">
+
+                  ${
+                    hasOrder
+                    ? `${clientOrders.length} commande(s)`
+                    : "Aucune commande"
+                  }
+
+                </div>
+
+
+                <div class="client-meta">
+
+                  ${
+                    lastOrder
+                    ? escapeHTML(lastOrder.plan)
+                    : "—"
+                  }
+
+                </div>
+
+
+                <div>
+
+                  <span
+                    class="client-status ${
+                      hasOrder
+                        ? "has-order"
+                        : "no-order"
+                    }"
+                  >
+
+                    ${
+                      hasOrder
+                      ? "● Client actif"
+                      : "○ Aucun commande"
+                    }
+
+                  </span>
+
+                </div>
+
+
+                <div>
+
+                  ${
+                    hasOrder
+                    ? `
+                      <button
+                        class="action-btn"
+                        onclick="showClientOrders('${escapeHTML(client.email)}')"
+                      >
+                        Voir commandes
+                      </button>
+                    `
+                    : `
+                      <span
+                        class="client-meta"
+                      >
+                        Prospect
+                      </span>
+                    `
+                  }
+
+                </div>
+
+              </div>
+
+            `;
+
+          }).join("")}
+
+        `;
+
+      }
+
+
+      $("#statClients").textContent =
+        clients.length;
+
+    }
+
+
+    /*
+     * =====================================================
+     * EDIT ORDER
+     * =====================================================
+     */
+
+    window.editOrder = function(id) {
+
+      const orders = getOrders();
+
+      const order =
+        orders.find(
+          item => item.id === id
+        );
+
+      if (!order) return;
+
+
+      $("#editId").value =
+        order.id;
+
+      $("#editName").value =
+        order.name || "";
+
+      $("#editEmail").value =
+        order.email || "";
+
+      $("#editPlan").value =
+        order.plan || "STARTER";
+
+      $("#editPrice").value =
+        order.price ?? 0;
+
+      $("#editPages").value =
+        order.pages || "";
+
+      $("#editStatus").value =
+        order.status || "Commande reçue";
+
+      $("#editFeatures").value =
+        Array.isArray(order.features)
+        ? order.features.join(", ")
+        : order.features || "";
+
+      $("#editNotes").value =
+        order.notes || "";
+
+
+      openModal("editOverlay");
+
+    };
+
+
+    /*
+     * =====================================================
+     * SAVE EDIT
+     * =====================================================
+     */
+
+    $("#editForm").addEventListener(
+      "submit",
+      function(e) {
+
+        e.preventDefault();
+
+        const orders = getOrders();
+
+        const id =
+          $("#editId").value;
+
+        const index =
+          orders.findIndex(
+            order => order.id === id
+          );
+
+        if (index === -1) return;
+
+
+        orders[index] = {
+
+          ...orders[index],
+
+          name:
+            $("#editName").value.trim(),
+
+          email:
+            $("#editEmail").value.trim(),
+
+          plan:
+            $("#editPlan").value,
+
+          price:
+            Number($("#editPrice").value || 0),
+
+          pages:
+            $("#editPages").value.trim(),
+
+          status:
+            $("#editStatus").value,
+
+          features:
+            $("#editFeatures").value
+              .split(",")
+              .map(x => x.trim())
+              .filter(Boolean),
+
+          notes:
+            $("#editNotes").value.trim(),
+
+          updated:
+            new Date().toLocaleDateString("fr-FR")
+
+        };
+
+
+        saveOrders(orders);
+
+        closeModal("editOverlay");
+
+        renderAll();
+
+        showToast(
+          "Commande mise à jour."
+        );
+
+      }
+    );
+
+
+    /*
+     * =====================================================
+     * MARK DONE
+     * =====================================================
+     */
+
+    window.markDone = function(id) {
+
+      const orders = getOrders();
+
+      const order =
+        orders.find(
+          item => item.id === id
+        );
+
+      if (!order) return;
+
+
+      order.status = "Terminé";
+
+      order.updated =
+        new Date().toLocaleDateString("fr-FR");
+
+
+      saveOrders(orders);
+
+      renderAll();
+
+      showToast(
+        "Commande déplacée dans « Terminées »."
+      );
+
+    };
+
+
+    /*
+     * =====================================================
+     * REOPEN
+     * =====================================================
+     */
+
+    window.reopenOrder = function(id) {
+
+      const orders = getOrders();
+
+      const order =
+        orders.find(
+          item => item.id === id
+        );
+
+      if (!order) return;
+
+
+      order.status =
+        "Final Review";
+
+      order.updated =
+        new Date().toLocaleDateString("fr-FR");
+
+
+      saveOrders(orders);
+
+      renderAll();
+
+      showToast(
+        "Commande réouverte."
+      );
+
+    };
+
+
+    /*
+     * =====================================================
+     * DELETE
+     * =====================================================
+     */
+
+    window.deleteOrder = function(id) {
+
+      const orders = getOrders();
+
+      const order =
+        orders.find(
+          item => item.id === id
+        );
+
+      if (!order) return;
+
+
+      const confirmed =
+        confirm(
+          `Supprimer définitivement la commande ${order.code} ?`
+        );
+
+      if (!confirmed) return;
+
+
+      saveOrders(
+        orders.filter(
+          item => item.id !== id
+        )
+      );
+
+
+      renderAll();
+
+      showToast(
+        "Commande supprimée."
+      );
+
+    };
+
+
+    /*
+     * =====================================================
+     * SHOW CLIENT ORDERS
+     * =====================================================
+     */
+
+    window.showClientOrders = function(email) {
+
+      const orders =
+        getOrders().filter(
+          order =>
+            order.email.toLowerCase() ===
+            email.toLowerCase()
+        );
+
+
+      if (!orders.length) return;
+
+
+      $(".tab[data-tab='active']").click();
+
+      $("#activeSearch").value =
+        email;
+
+      renderOrders();
+
+    };
+
+
+    /*
+     * =====================================================
+     * ADD CLIENT
+     * =====================================================
+     */
+
+    $("#newClientBtn").addEventListener(
+      "click",
+      () => openModal("clientOverlay")
+    );
+
+
+    $("#clientForm").addEventListener(
+      "submit",
+      function(e) {
+
+        e.preventDefault();
+
+        const name =
+          $("#clientName").value.trim();
+
+        const email =
+          $("#clientEmail").value.trim();
+
+
+        if (!name || !email) return;
+
+
+        const clients = getClients();
+
+        const exists =
+          clients.some(
+            client =>
+              client.email.toLowerCase() ===
+              email.toLowerCase()
+          );
+
+
+        if (exists) {
+
+          showToast(
+            "Ce client existe déjà."
+          );
+
+          return;
+
+        }
+
+
+        clients.push({
+
+          id:
+            "client_" +
+            Date.now(),
+
+          name,
+
+          email,
+
+          created:
+            new Date().toLocaleDateString("fr-FR")
+
+        });
+
+
+        saveClients(clients);
+
+
+        $("#clientForm").reset();
+
+        closeModal("clientOverlay");
+
+        renderAll();
+
+        showToast(
+          "Client ajouté."
+        );
+
+      }
+    );
+
+
+    /*
+     * =====================================================
+     * SEARCH
+     * =====================================================
+     */
+
+    $("#activeSearch")
+      .addEventListener(
+        "input",
+        renderOrders
+      );
+
+
+    $("#doneSearch")
+      .addEventListener(
+        "input",
+        renderOrders
+      );
+
+
+    $("#clientSearch")
+      .addEventListener(
+        "input",
+        renderClients
+      );
+
+
+    /*
+     * =====================================================
+     * REFRESH
+     * =====================================================
+     */
+
+    $("#refreshBtn").addEventListener(
+      "click",
+      function() {
+
+        renderAll();
+
+        showToast(
+          "Données actualisées."
+        );
+
+      }
+    );
+
+
+    /*
+     * =====================================================
+     * IMPORT CLIENT ORDER
+     * =====================================================
+     *
+     * Cette fonction permet de connecter plus tard
+     * facilement les données reçues depuis le Client Portal.
+     *
+     * Exemple attendu :
+     *
+     * {
+     *   code: "NAS-2026-8F42K",
+     *   name: "Jean Dupont",
+     *   email: "jean@email.com",
+     *   plan: "ESSENTIAL",
+     *   price: 49,
+     *   pages: "3-5",
+     *   features: [...],
+     *   logo: false,
+     *   status: "Commande reçue"
+     * }
+     */
+
+    function importOrder(orderData) {
+
+      const orders = getOrders();
+
+      const existing =
+        orders.find(
+          order =>
+            order.code === orderData.code
+        );
+
+
+      if (existing) {
+
+        Object.assign(
+          existing,
+          orderData
+        );
+
+      } else {
+
+        orders.push({
+
+          id:
+            "order_" +
+            Date.now(),
+
+          code:
+            orderData.code ||
+            generateId(),
+
+          name:
+            orderData.name || "",
+
+          email:
+            orderData.email || "",
+
+          plan:
+            orderData.plan || "STARTER",
+
+          price:
+            Number(orderData.price || 29),
+
+          pages:
+            orderData.pages || "1",
+
+          features:
+            orderData.features || [],
+
+          logo:
+            Boolean(orderData.logo),
+
+          status:
+            orderData.status ||
+            "Commande reçue",
+
+          date:
+            orderData.date ||
+            new Date().toLocaleDateString("fr-FR"),
+
+          updated:
+            new Date().toLocaleDateString("fr-FR"),
+
+          revisions:
+            orderData.revisions || "—",
+
+          domain:
+            orderData.domain !== false,
+
+          source:
+            "Client portal",
+
+          notes:
+            orderData.notes || ""
+
+        });
+
+      }
+
+
+      saveOrders(orders);
+
+
+      /*
+       * Ajouter automatiquement le client
+       * s'il n'existe pas encore.
+       */
+
+      const clients =
+        getClients();
+
+      const existsClient =
+        clients.some(
+          client =>
+            client.email.toLowerCase() ===
+            String(orderData.email || "")
+              .toLowerCase()
+        );
+
+
+      if (
+        orderData.email &&
+        !existsClient
+      ) {
+
+        clients.push({
+
+          id:
+            "client_" +
+            Date.now(),
+
+          name:
+            orderData.name || "",
+
+          email:
+            orderData.email,
+
+          created:
+            new Date().toLocaleDateString("fr-FR")
+
+        });
+
+
+        saveClients(clients);
+
+      }
+
+
+      renderAll();
+
+    }
+
+
+    /*
+     * =====================================================
+     * RENDER EVERYTHING
+     * =====================================================
+     */
+
+    function renderAll() {
+
+      renderOrders();
+
+      renderClients();
+
+    }
+
+
+    /*
+     * =====================================================
+     * SESSION
+     * =====================================================
+     */
+
+    const authenticated =
+      sessionStorage.getItem(
+        "nas_admin_authenticated"
+      );
+
+
+    if (authenticated === "1") {
+
+      $("#loginScreen").style.display =
+        "none";
+
+      $("#app").classList.add(
+        "visible"
+      );
+
+      renderAll();
+
+    }
+
+  </script>
+
+</body>
+</html>
